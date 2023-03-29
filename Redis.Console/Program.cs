@@ -24,7 +24,8 @@ var key1 = db.ScriptEvaluate(script, new { id_key = (RedisKey)"autoincrement", v
 
 Console.WriteLine($"key 1: {key1}");
 
-// transactions
+// Transactions
+
 var trans = db.CreateTransaction();
 trans.HashSetAsync("person:1", new HashEntry[]
 {
@@ -45,7 +46,7 @@ var success = trans.Execute();
 Console.WriteLine($"success: {success}");
 
 
-// streams
+// Streams
 
 var sensor1 = "sensor:1";
 var sensor2 = "sensor:2";
@@ -98,9 +99,9 @@ Task.Run(async () =>
 
 Console.ReadKey();
 
-//
-// lists
-//
+
+// Lists
+
 var fruits = "fruits";
 var vegetables = "vegetables";
 
@@ -111,9 +112,8 @@ var entireList = string.Join(", ", db.ListRange(fruits));
 Console.WriteLine($"list {entireList}");
 
 
-//
-// sets
-//
+
+// Sets
 
 var allUsers = "users";
 var activeUsers = "users:active";
@@ -125,9 +125,7 @@ db.SetAdd(activeUsers, new RedisValue[] { "User1", "User2" });
 db.SetAdd(offlineUsers, new RedisValue[] { "User3", "User4" });
 db.SetCombineAndStore(SetOperation.Union, allUsers, new RedisKey[] { activeUsers, offlineUsers });
 
-//
-// hash
-//
+// Hash
 
 var user = "user";
 db.KeyDelete(new RedisKey[] { user });
